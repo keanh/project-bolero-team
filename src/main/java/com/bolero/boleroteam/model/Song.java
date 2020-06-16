@@ -109,6 +109,7 @@ public class Song {
 
     public Song(Long id, String name, String image, String lyrics, String fileMp3, Date dateSubmitted, String singer, String author, Long views, Style style) {
         this.id = id;
+
         this.name = name;
         this.image = image;
         this.lyrics = lyrics;
