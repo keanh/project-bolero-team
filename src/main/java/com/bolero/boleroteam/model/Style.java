@@ -36,7 +36,4 @@ public class Style {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Style() {
-    }
 }
