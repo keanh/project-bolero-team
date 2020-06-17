@@ -30,10 +30,9 @@ public class Song {
     @NotEmpty
     private String author;
     private Long views;
-
-    @ManyToOne
-    private Style style;
-
+//
+//    @ManyToOne
+//    private Style style;
 
     public Long getId() {
         return id;
@@ -107,11 +106,11 @@ public class Song {
         this.views = views;
     }
 
-    public Style getStyle() {
-        return style;
-    }
-
-    public void setStyle(Style style) {
-        this.style = style;
-    }
+//    public Style getStyle() {
+//        return style;
+//    }
+//
+//    public void setStyle(Style style) {
+//        this.style = style;
+//    }
 }
