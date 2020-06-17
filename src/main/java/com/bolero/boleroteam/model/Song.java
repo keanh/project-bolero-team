@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -22,7 +23,7 @@ public class Song {
     @NotEmpty
     private String lyrics;
     private String fileMp3;
-    private Date dateSubmitted;
+    private LocalDateTime dateSubmitted;
 
     @NotEmpty
     private String singer;
@@ -75,11 +76,11 @@ public class Song {
         this.fileMp3 = fileMp3;
     }
 
-    public Date getDateSubmitted() {
+    public LocalDateTime getDateSubmitted() {
         return dateSubmitted;
     }
 
-    public void setDateSubmitted(Date dateSubmitted) {
+    public void setDateSubmitted(LocalDateTime dateSubmitted) {
         this.dateSubmitted = dateSubmitted;
     }
 

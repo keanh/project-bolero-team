@@ -20,7 +20,7 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public Optional<Song> findById(Long id) {
-        return Optional.empty();
+        return songRepository.findById(id);
     }
 
     @Override
