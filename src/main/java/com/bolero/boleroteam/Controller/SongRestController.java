@@ -47,12 +47,20 @@ public class SongRestController {
     @PutMapping("song/{id}")
     public ResponseEntity<Song> updateSong(@PathVariable Long id,@RequestBody Song song){
         Optional<Song> song1 = songService.findById(id);
-        song1.get();
-        if (song1 == null){
+        Song song2 = song1.get();
+        if (song2 == null){
             return new ResponseEntity<Song>(HttpStatus.NOT_FOUND);
         }else {
-            songService.save(song);
-            return new ResponseEntity<Song>(song,HttpStatus.OK);
+            song2.setName(song.getName());
+            song2.setImage(song.getImage());
+            song2.setLyrics(song.getLyrics());
+            song2.setFileMp3(song.getFileMp3());
+            song2.setSinger(song.getSinger());
+            song2.setDateSubmitted(LocalDateTime.now());
+            song2.setAuthor(song.getAuthor());
+            song2.setStyle(song.getStyle());
+            songService.save(song2);
+            return new ResponseEntity<Song>(song2,HttpStatus.OK);
         }
     }
 
