@@ -7,13 +7,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class SongRestController {
@@ -31,5 +31,39 @@ public class SongRestController {
 //        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 //        String formatDateTime = now.format(format);
 //        System.out.println("After Formatting: " + formatDateTime);
+    }
+
+    @GetMapping(value = "song")
+    public ResponseEntity<List<Song>> listSongs(){
+        List<Song> songs;
+        songs = songService.findAll();
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
+
+    @PutMapping("song/{id}")
+    public ResponseEntity<Song> updateSong(@PathVariable Long id,@RequestBody Song song){
+        Optional<Song> song1 = songService.findById(id);
+        song1.get();
+        if (song1 == null){
+            return new ResponseEntity<Song>(HttpStatus.NOT_FOUND);
+        }else {
+            songService.save(song);
+            return new ResponseEntity<Song>(song,HttpStatus.OK);
+        }
+    }
+
+    @DeleteMapping("song/{id}")
+    public ResponseEntity<Song> deleteSong(@PathVariable Long id){
+        Optional<Song> song = songService.findById(id);
+        if (song == null){
+            return new ResponseEntity<Song>(HttpStatus.NOT_FOUND);
+        }else {
+            songService.remove(id);
+            return new ResponseEntity<Song>(HttpStatus.NO_CONTENT);
+        }
     }
 }

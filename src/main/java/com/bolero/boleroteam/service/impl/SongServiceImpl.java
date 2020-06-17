@@ -15,7 +15,7 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public List<Song> findAll() {
-        return null;
+        return (List<Song>) songRepository.findAll();
     }
 
     @Override
@@ -30,6 +30,6 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public void remove(Long id) {
-
+        songRepository.deleteById(id);
     }
 }
