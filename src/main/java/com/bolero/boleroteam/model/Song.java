@@ -114,21 +114,4 @@ public class Song {
     public void setStyle(Style style) {
         this.style = style;
     }
-
-//    public Song() {
-//
-//    }
-
-//    public Song(Long id, String name, String image, String lyrics, String fileMp3, Date dateSubmitted, String singer, String author, Long views, Style style) {
-//        this.id = id;
-//        this.name = name;
-//        this.image = image;
-//        this.lyrics = lyrics;
-//        this.fileMp3 = fileMp3;
-//        this.dateSubmitted = dateSubmitted;
-//        this.singer = singer;
-//        this.author = author;
-//        this.views = views;
-//        this.style = style;
-//    }
 }
