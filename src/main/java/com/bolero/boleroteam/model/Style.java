@@ -36,13 +36,4 @@ public class Style {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Style() {
-    }
-
-    public Style(Long id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
 }

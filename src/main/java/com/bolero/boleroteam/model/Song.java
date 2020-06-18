@@ -3,19 +3,32 @@ package com.bolero.boleroteam.model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
+@Table
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotEmpty
     private String name;
+
+    @NotEmpty
     private String image;
+
+//    @NotEmpty
     private String lyrics;
     private String fileMp3;
-    private Date dateSubmitted;
+    private LocalDateTime dateSubmitted;
+
+    @NotEmpty
     private String singer;
+
+    @NotEmpty
     private String author;
     private Long views;
 
@@ -63,11 +76,11 @@ public class Song {
         this.fileMp3 = fileMp3;
     }
 
-    public Date getDateSubmitted() {
+    public LocalDateTime getDateSubmitted() {
         return dateSubmitted;
     }
 
-    public void setDateSubmitted(Date dateSubmitted) {
+    public void setDateSubmitted(LocalDateTime dateSubmitted) {
         this.dateSubmitted = dateSubmitted;
     }
 
@@ -103,21 +116,20 @@ public class Song {
         this.style = style;
     }
 
-    public Song() {
+//    public Song() {
+//
+//    }
 
-    }
-
-    public Song(Long id, String name, String image, String lyrics, String fileMp3, Date dateSubmitted, String singer, String author, Long views, Style style) {
-        this.id = id;
-
-        this.name = name;
-        this.image = image;
-        this.lyrics = lyrics;
-        this.fileMp3 = fileMp3;
-        this.dateSubmitted = dateSubmitted;
-        this.singer = singer;
-        this.author = author;
-        this.views = views;
-        this.style = style;
-    }
+//    public Song(Long id, String name, String image, String lyrics, String fileMp3, Date dateSubmitted, String singer, String author, Long views, Style style) {
+//        this.id = id;
+//        this.name = name;
+//        this.image = image;
+//        this.lyrics = lyrics;
+//        this.fileMp3 = fileMp3;
+//        this.dateSubmitted = dateSubmitted;
+//        this.singer = singer;
+//        this.author = author;
+//        this.views = views;
+//        this.style = style;
+//    }
 }
