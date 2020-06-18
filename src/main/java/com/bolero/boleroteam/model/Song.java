@@ -20,7 +20,7 @@ public class Song {
     @NotEmpty
     private String image;
 
-    @NotEmpty
+//    @NotEmpty
     private String lyrics;
     private String fileMp3;
     private LocalDateTime dateSubmitted;
