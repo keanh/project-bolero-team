@@ -45,6 +45,17 @@ public class SongRestController {
         }
     }
 
+    @GetMapping(value = "song/{id}")
+    public ResponseEntity<Song> findSongById(@PathVariable Long id){
+        Optional<Song> song = songService.findById(id);
+        Song song1 = song.get();
+        if (song1 == null){
+            return new ResponseEntity<Song>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<Song>(song1,HttpStatus.OK);
+        }
+    }
+
     @PutMapping("song/{id}")
     public ResponseEntity<Song> updateSong(@PathVariable Long id,@RequestBody Song song){
         Optional<Song> song1 = songService.findById(id);
