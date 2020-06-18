@@ -1,16 +1,15 @@
 package com.bolero.boleroteam.model;
 
-import org.springframework.web.bind.annotation.GetMapping;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table
 public class Song {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
@@ -22,7 +21,7 @@ public class Song {
     @NotEmpty
     private String lyrics;
     private String fileMp3;
-    private Date dateSubmitted;
+    private LocalDateTime dateSubmitted;
 
     @NotEmpty
     private String singer;
@@ -30,9 +29,13 @@ public class Song {
     @NotEmpty
     private String author;
     private Long views;
-//
+
 //    @ManyToOne
 //    private Style style;
+
+    @ManyToOne
+    private Style style;
+
 
     public Long getId() {
         return id;
@@ -74,11 +77,11 @@ public class Song {
         this.fileMp3 = fileMp3;
     }
 
-    public Date getDateSubmitted() {
+    public LocalDateTime getDateSubmitted() {
         return dateSubmitted;
     }
 
-    public void setDateSubmitted(Date dateSubmitted) {
+    public void setDateSubmitted(LocalDateTime dateSubmitted) {
         this.dateSubmitted = dateSubmitted;
     }
 
@@ -106,11 +109,28 @@ public class Song {
         this.views = views;
     }
 
-//    public Style getStyle() {
-//        return style;
-//    }
+    public Style getStyle() {
+        return style;
+    }
+
+    public void setStyle(Style style) {
+        this.style = style;
+    }
+
+//    public Song() {
 //
-//    public void setStyle(Style style) {
+//    }
+
+//    public Song(Long id, String name, String image, String lyrics, String fileMp3, Date dateSubmitted, String singer, String author, Long views, Style style) {
+//        this.id = id;
+//        this.name = name;
+//        this.image = image;
+//        this.lyrics = lyrics;
+//        this.fileMp3 = fileMp3;
+//        this.dateSubmitted = dateSubmitted;
+//        this.singer = singer;
+//        this.author = author;
+//        this.views = views;
 //        this.style = style;
 //    }
 }
