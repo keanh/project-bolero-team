@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("*")
 public class SongRestController {
     @Autowired
     private SongService songService;
@@ -72,6 +73,24 @@ public class SongRestController {
         }else {
             songService.remove(id);
             return new ResponseEntity<Song>(HttpStatus.NO_CONTENT);
+        }
+    }
+    @GetMapping("/api/findByLyrics/{lyric}")
+    public ResponseEntity<List<Song>> findByLyrics(@PathVariable("lyric") String lyrics){
+        List<Song> songs = songService.findByLyrics(lyrics);
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
+    @GetMapping("/api/findByName/{name}")
+    public ResponseEntity<List<Song>> findByName(@PathVariable("name") String name){
+        List<Song> songs = songService.findByName(name);
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
         }
     }
 }
