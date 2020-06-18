@@ -86,6 +86,22 @@ public class SongRestController {
             return new ResponseEntity<Song>(HttpStatus.NO_CONTENT);
         }
     }
-
-
+    @GetMapping("/api/findByLyrics/{lyric}")
+    public ResponseEntity<List<Song>> findByLyrics(@PathVariable("lyric") String lyrics){
+        List<Song> songs = songService.findByLyrics(lyrics);
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
+    @GetMapping("/api/findByName/{name}")
+    public ResponseEntity<List<Song>> findByName(@PathVariable("name") String name){
+        List<Song> songs = songService.findByName(name);
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
 }

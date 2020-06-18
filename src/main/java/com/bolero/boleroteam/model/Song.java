@@ -11,7 +11,7 @@ import java.util.Date;
 @Table
 public class Song {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
@@ -31,6 +31,9 @@ public class Song {
     @NotEmpty
     private String author;
     private Long views;
+
+//    @ManyToOne
+//    private Style style;
 
     @ManyToOne
     private Style style;

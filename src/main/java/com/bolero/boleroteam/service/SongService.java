@@ -11,4 +11,6 @@ public interface SongService {
     Optional<Song> findById(Long id);
     void save(Song song);
     void remove(Long id);
+    List<Song> findByLyrics(String lyrics);
+    List<Song> findByName(String name);
 }
