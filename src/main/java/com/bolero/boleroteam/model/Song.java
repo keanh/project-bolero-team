@@ -32,6 +32,9 @@ public class Song {
     private String author;
     private Long views;
 
+//    @ManyToOne
+//    private Style style;
+
     @ManyToOne
     private Style style;
 
