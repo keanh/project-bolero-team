@@ -32,4 +32,14 @@ public class SongServiceImpl implements SongService {
     public void remove(Long id) {
         songRepository.deleteById(id);
     }
+
+    @Override
+    public List<Song> findByLyrics(String lyrics) {
+        return songRepository.findByLyricsContaining(lyrics);
+    }
+
+    @Override
+    public List<Song> findByName(String name) {
+        return songRepository.findByNameContaining(name);
+    }
 }

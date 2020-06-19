@@ -1,7 +1,7 @@
-package com.bolero.boleroteam.controller;
+package com.bolero.boleroteam.Controller;
 
 import com.bolero.boleroteam.model.Style;
-import com.bolero.boleroteam.service.style.StyleService;
+import com.bolero.boleroteam.service.StyleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

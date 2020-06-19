@@ -5,13 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table
 public class Song {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
@@ -20,7 +19,8 @@ public class Song {
     @NotEmpty
     private String image;
 
-//    @NotEmpty
+    @NotEmpty
+    @Column(length = 65535, columnDefinition = "text")
     private String lyrics;
     private String fileMp3;
     private LocalDateTime dateSubmitted;
@@ -35,6 +35,8 @@ public class Song {
     @ManyToOne
     private Style style;
 
+    @ManyToOne(targetEntity = User.class)
+    private User user;
 
     public Long getId() {
         return id;
@@ -116,20 +118,11 @@ public class Song {
         this.style = style;
     }
 
-//    public Song() {
-//
-//    }
+    public User getUser() {
+        return user;
+    }
 
-//    public Song(Long id, String name, String image, String lyrics, String fileMp3, Date dateSubmitted, String singer, String author, Long views, Style style) {
-//        this.id = id;
-//        this.name = name;
-//        this.image = image;
-//        this.lyrics = lyrics;
-//        this.fileMp3 = fileMp3;
-//        this.dateSubmitted = dateSubmitted;
-//        this.singer = singer;
-//        this.author = author;
-//        this.views = views;
-//        this.style = style;
-//    }
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

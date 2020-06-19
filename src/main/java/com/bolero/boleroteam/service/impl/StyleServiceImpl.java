@@ -15,7 +15,7 @@ public class StyleServiceImpl implements StyleService {
 
     @Override
     public List<Style> findAll() {
-        return null;
+        return (List<Style>) styleRepository.findAll();
     }
 
     @Override
@@ -30,6 +30,6 @@ public class StyleServiceImpl implements StyleService {
 
     @Override
     public void remove(Long id) {
-
+        styleRepository.deleteById(id);
     }
 }
