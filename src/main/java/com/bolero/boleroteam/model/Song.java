@@ -20,6 +20,7 @@ public class Song {
     private String image;
 
     @NotEmpty
+    @Column(length = 65535, columnDefinition = "text")
     private String lyrics;
     private String fileMp3;
     private LocalDateTime dateSubmitted;

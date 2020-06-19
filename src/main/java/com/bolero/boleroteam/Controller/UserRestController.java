@@ -49,7 +49,7 @@ public class UserRestController {
         }
     }
 
-    @PutMapping("song/{id}")
+    @PutMapping("user/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id,@RequestBody User user){
         Optional<User> user1 = userService.findById(id);
         User user2 = user1.get();
