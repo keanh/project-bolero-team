@@ -86,7 +86,8 @@ public class SongRestController {
             return new ResponseEntity<Song>(HttpStatus.NO_CONTENT);
         }
     }
-    @GetMapping("/api/findByLyrics/{lyric}")
+
+    @GetMapping("findByLyrics/{lyric}")
     public ResponseEntity<List<Song>> findByLyrics(@PathVariable("lyric") String lyrics){
         List<Song> songs = songService.findByLyrics(lyrics);
         if (songs.isEmpty()){
@@ -95,7 +96,7 @@ public class SongRestController {
             return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
         }
     }
-    @GetMapping("/api/findByName/{name}")
+    @GetMapping("findByName/{name}")
     public ResponseEntity<List<Song>> findByName(@PathVariable("name") String name){
         List<Song> songs = songService.findByName(name);
         if (songs.isEmpty()){

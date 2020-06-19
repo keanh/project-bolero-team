@@ -30,6 +30,6 @@ public class StyleServiceImpl implements StyleService {
 
     @Override
     public void remove(Long id) {
-
+        styleRepository.deleteById(id);
     }
 }

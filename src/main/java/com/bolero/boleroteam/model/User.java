@@ -1,7 +1,10 @@
 package com.bolero.boleroteam.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -11,16 +14,23 @@ public class User {
     private long id;
 
     @NotEmpty
+    @Size(min = 5,max = 45)
     private String name;
 
-    @NotEmpty
+    @Min(18)
     private Long age;
 
     @NotEmpty
+    @Email
     private String email;
 
     @NotEmpty
     private String phone;
+
+    @Column(unique = true)
+    private String username;
+
+    private String password;
 
     public long getId() {
         return id;
@@ -60,5 +70,21 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
