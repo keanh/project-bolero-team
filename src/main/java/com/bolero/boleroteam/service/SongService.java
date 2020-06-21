@@ -11,4 +11,5 @@ public interface SongService {
     void remove(Long id);
     List<Song> findByLyrics(String lyrics);
     List<Song> findByName(String name);
+    List<Song> findByDateSummited();
 }

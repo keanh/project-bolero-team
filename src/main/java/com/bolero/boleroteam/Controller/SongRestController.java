@@ -43,6 +43,17 @@ public class SongRestController {
         }
     }
 
+    @GetMapping(value = "song/{id}")
+    public ResponseEntity<Song> findSongById(@PathVariable Long id){
+        Optional<Song> song = songService.findById(id);
+        Song song1 = song.get();
+        if (song1 == null){
+            return new ResponseEntity<Song>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<Song>(song1,HttpStatus.OK);
+        }
+    }
+
     @PutMapping("song/{id}")
     public ResponseEntity<Song> updateSong(@PathVariable Long id,@RequestBody Song song){
         Optional<Song> song1 = songService.findById(id);
@@ -73,7 +84,8 @@ public class SongRestController {
             return new ResponseEntity<Song>(HttpStatus.NO_CONTENT);
         }
     }
-    @GetMapping("/api/findByLyrics/{lyric}")
+
+    @GetMapping("findByLyrics/{lyric}")
     public ResponseEntity<List<Song>> findByLyrics(@PathVariable("lyric") String lyrics){
         List<Song> songs = songService.findByLyrics(lyrics);
         if (songs.isEmpty()){
@@ -82,9 +94,19 @@ public class SongRestController {
             return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
         }
     }
-    @GetMapping("/api/findByName/{name}")
+    @GetMapping("findByName/{name}")
     public ResponseEntity<List<Song>> findByName(@PathVariable("name") String name){
         List<Song> songs = songService.findByName(name);
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "lastest-song")
+    public ResponseEntity<List<Song>> findLastestSong(){
+        List<Song> songs = songService.findByDateSummited();
         if (songs.isEmpty()){
             return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
         }else {
