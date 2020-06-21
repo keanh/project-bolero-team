@@ -22,6 +22,8 @@ public class Song {
     @NotEmpty
     @Column(length = 65535, columnDefinition = "text")
     private String lyrics;
+
+    @NotEmpty
     private String fileMp3;
     private LocalDateTime dateSubmitted;
 
