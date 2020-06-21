@@ -42,4 +42,9 @@ public class SongServiceImpl implements SongService {
     public List<Song> findByName(String name) {
         return songRepository.findByNameContaining(name);
     }
+
+    @Override
+    public List<Song> findByDateSummited() {
+        return songRepository.findByOrderByDateSubmittedDesc();
+    }
 }
