@@ -1,4 +1,4 @@
-package com.bolero.boleroteam.Controller;
+package com.bolero.boleroteam.controller;
 
 import com.bolero.boleroteam.model.Song;
 import com.bolero.boleroteam.service.SongService;
@@ -28,10 +28,6 @@ public class SongRestController {
         songService.save(song);
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-        //        System.out.println("Before Formatting: " + now);
-//        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-//        String formatDateTime = now.format(format);
-//        System.out.println("After Formatting: " + formatDateTime);
     }
 
     @GetMapping(value = "song")
