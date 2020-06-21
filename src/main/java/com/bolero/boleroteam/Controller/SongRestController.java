@@ -105,4 +105,14 @@ public class SongRestController {
             return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
         }
     }
+
+    @GetMapping(value = "lastest-song")
+    public ResponseEntity<List<Song>> findLastestSong(){
+        List<Song> songs = songService.findByDateSummited();
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
 }
