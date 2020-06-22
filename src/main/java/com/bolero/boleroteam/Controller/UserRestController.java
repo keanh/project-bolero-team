@@ -1,6 +1,5 @@
 package com.bolero.boleroteam.Controller;
 
-import com.bolero.boleroteam.model.Song;
 import com.bolero.boleroteam.model.User;
 import com.bolero.boleroteam.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class UserRestController {
     private UserService userService;
 
     @PostMapping(value = "user/create",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createSong(@RequestBody User user){
+    public ResponseEntity<Void> createUser(@RequestBody User user){
         userService.save(user);
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);

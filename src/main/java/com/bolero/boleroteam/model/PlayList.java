@@ -15,7 +15,11 @@ public class PlayList {
     @ManyToOne
     private User user;
 
-    @ManyToMany
+    @ManyToMany()
+    @JoinTable(
+            name = "playlist_songList",
+            joinColumns = @JoinColumn(name = "playList_id"),
+            inverseJoinColumns = @JoinColumn(name = "song_id"))
     private List<Song> songList;
 
     public Long getId() {

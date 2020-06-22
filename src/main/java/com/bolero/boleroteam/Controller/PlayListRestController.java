@@ -42,10 +42,35 @@ public class PlayListRestController {
 
     @PostMapping(value = "album/create")
     public ResponseEntity<Void> createAlbum(@RequestBody PlayList playList){
-        playListService.save(playList);
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<Void>(headers,HttpStatus.CREATED);
+        if (playList.getId() == null){
+            playListService.save(playList);
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<Void>(headers,HttpStatus.CREATED);
+        }else {
+            Optional<PlayList> playList1 = playListService.findById(playList.getId());
+            PlayList album = playList1.get();
+            List<Song> songList = playList.getSongList();
+            for (Song song: album.getSongList()) {
+                songList.add(song);
+            }
+            album.setSongList(songList);
+            playListService.save(album);
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<Void>(headers,HttpStatus.CREATED);
+        }
+
     }
+
+//    @PutMapping(value = "album/addSong/{id1}/{id2}")
+//    public ResponseEntity<Void> addSongToAlbum(@PathVariable("id1") Long id_album,@PathVariable("id2") Long id_song){
+//        Optional<PlayList> playList = playListService.findById(id_album);
+//        PlayList album = playList.get();
+//        if (album == null){
+//            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+//        }else {
+//            album.setSongList(id_song);
+//        }
+//    }
 
     @PutMapping(value = "album/{id}")
     public ResponseEntity<PlayList> updateAlbum(@PathVariable Long id, @RequestBody PlayList playList){
@@ -55,7 +80,7 @@ public class PlayListRestController {
             return new ResponseEntity<PlayList>(HttpStatus.NOT_FOUND);
         }else {
             playList1.setName(playList.getName());
-            playList1.setSongList(playList.getSongList());
+//            playList1.setSongList(playList.getSongList());
             playListService.save(playList1);
             return new ResponseEntity<PlayList>(playList1,HttpStatus.OK);
         }
