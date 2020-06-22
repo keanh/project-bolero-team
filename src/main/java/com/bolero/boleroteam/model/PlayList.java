@@ -1,20 +1,22 @@
 package com.bolero.boleroteam.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
 public class PlayList {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Long id ;
+
+    private String name;
 
     @ManyToOne
     private User user;
 
-    @ManyToOne
-    private Song song ;
+    @ManyToMany
+    private List<Song> songList;
 
     public Long getId() {
         return id;
@@ -32,11 +34,19 @@ public class PlayList {
         this.user = user;
     }
 
-    public Song getSong() {
-        return song;
+    public String getName() {
+        return name;
     }
 
-    public void setSong(Song song) {
-        this.song = song;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Song> getSongList() {
+        return songList;
+    }
+
+    public void setSongList(List<Song> songList) {
+        this.songList = songList;
     }
 }
