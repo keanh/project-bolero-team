@@ -61,17 +61,6 @@ public class PlayListRestController {
 
     }
 
-//    @PutMapping(value = "album/addSong/{id1}/{id2}")
-//    public ResponseEntity<Void> addSongToAlbum(@PathVariable("id1") Long id_album,@PathVariable("id2") Long id_song){
-//        Optional<PlayList> playList = playListService.findById(id_album);
-//        PlayList album = playList.get();
-//        if (album == null){
-//            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-//        }else {
-//            album.setSongList(id_song);
-//        }
-//    }
-
     @PutMapping(value = "album/{id}")
     public ResponseEntity<PlayList> updateAlbum(@PathVariable Long id, @RequestBody PlayList playList){
         Optional<PlayList> album = playListService.findById(id);
