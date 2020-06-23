@@ -76,7 +76,7 @@ public class UserRestController {
         }
     }
 
-    @PutMapping("user/{id}")
+    @PutMapping("user/updatePassword/{id}")
     public ResponseEntity<User> updatePassword(@PathVariable Long id,@RequestBody User user){
         Optional<User> user1 = userService.findById(id);
         User user2 = user1.get();
