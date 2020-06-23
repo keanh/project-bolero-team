@@ -29,6 +29,8 @@ public class User {
     @Email
     private String email;
 
+    private String avatar;
+
     private String phone;
 
     private String address;
@@ -129,5 +131,13 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

@@ -1,4 +1,4 @@
-package com.bolero.boleroteam.Controller;
+package com.bolero.boleroteam.controller;
 
 import com.bolero.boleroteam.model.User;
 import com.bolero.boleroteam.service.UserService;
@@ -55,12 +55,12 @@ public class UserRestController {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }else {
             user2.setFirstName(user.getFirstName());
-            user2.setLastName(user.getLastName());
+            user2.setLastName(user.getLastName());            user2.setAvatar(user.getAvatar());
+            user2.setAvatar(user.getAvatar());
             user2.setBirthday(user.getBirthday());
             user2.setAddress(user.getAddress());
-            user2.setAge(user.getAge());
-            user2.setEmail(user.getEmail());
             user2.setPhone(user.getPhone());
+            user2.setEmail(user.getEmail());
             userService.save(user2);
             return new ResponseEntity<User>(user2,HttpStatus.OK);
         }
