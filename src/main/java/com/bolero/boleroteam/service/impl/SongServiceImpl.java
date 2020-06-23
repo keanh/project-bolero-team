@@ -47,4 +47,9 @@ public class SongServiceImpl implements SongService {
     public List<Song> findByDateSummited() {
         return songRepository.findByOrderByDateSubmittedDesc();
     }
+
+    @Override
+    public List<Song> find3LastestSong() {
+        return songRepository.findTop3ByOrderByDateSubmittedDesc();
+    }
 }

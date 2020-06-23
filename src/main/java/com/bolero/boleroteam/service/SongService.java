@@ -12,4 +12,5 @@ public interface SongService {
     List<Song> findByLyrics(String lyrics);
     List<Song> findByName(String name);
     List<Song> findByDateSummited();
+    List<Song> find3LastestSong();
 }
