@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table
-public class Like {
+public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

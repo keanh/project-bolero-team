@@ -16,15 +16,12 @@ public class User {
     private long id;
 
     @NotEmpty
-    @Size(min = 5,max = 45)
+    @Size(min = 1,max = 45)
     private String firstName;
 
     @NotEmpty
-    @Size(min = 5,max = 45)
+    @Size(min = 1,max = 45)
     private String lastName;
-
-    @Min(18)
-    private Long age;
 
     @Email
     private String email;
@@ -38,6 +35,14 @@ public class User {
     @Column(unique = true)
     private String username;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -49,14 +54,6 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Long getAge() {
-        return age;
-    }
-
-    public void setAge(Long age) {
-        this.age = age;
     }
 
     public String getEmail() {
@@ -73,14 +70,6 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
