@@ -65,7 +65,7 @@ public class UserRestController {
         }
     }
 
-    @DeleteMapping("user/{id}")
+    @DeleteMapping("user/updatePassword/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable Long id){
         Optional<User> user = userService.findById(id);
         if (user == null){
@@ -76,7 +76,7 @@ public class UserRestController {
         }
     }
 
-    @PutMapping("user/updatePassword/{id}")
+    @PutMapping("user/{id}")
     public ResponseEntity<User> updatePassword(@PathVariable Long id,@RequestBody User user){
         Optional<User> user1 = userService.findById(id);
         User user2 = user1.get();

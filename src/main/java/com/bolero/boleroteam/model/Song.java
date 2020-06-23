@@ -1,6 +1,8 @@
 package com.bolero.boleroteam.model;
 
+import net.bytebuddy.implementation.bind.annotation.Default;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -34,7 +36,7 @@ public class Song {
     @NotEmpty
     private String author;
 
-    private Long views;
+    private Long views = 0L;
 
     @ManyToOne
     private Style style;
@@ -115,6 +117,9 @@ public class Song {
 
     public void setViews(Long views) {
         this.views = views;
+    }
+    public Long increment(){
+        return views++;
     }
 
     public Style getStyle() {

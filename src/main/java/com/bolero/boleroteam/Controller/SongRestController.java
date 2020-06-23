@@ -1,4 +1,4 @@
-package com.bolero.boleroteam.controller;
+package com.bolero.boleroteam.Controller;
 
 import com.bolero.boleroteam.model.Song;
 import com.bolero.boleroteam.service.SongService;
@@ -46,6 +46,8 @@ public class SongRestController {
         if (song1 == null){
             return new ResponseEntity<Song>(HttpStatus.NOT_FOUND);
         }else {
+            song1.increment();
+            songService.save(song1);
             return new ResponseEntity<Song>(song1,HttpStatus.OK);
         }
     }
