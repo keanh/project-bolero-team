@@ -100,9 +100,9 @@ public class SongRestController {
         }
     }
 
-    @GetMapping(value = "lastest-song")
-    public ResponseEntity<List<Song>> findLastestSong(){
-        List<Song> songs = songService.findByDateSummited();
+    @GetMapping(value = "latest-song")
+    public ResponseEntity<List<Song>> findLatestSong(){
+        List<Song> songs = songService.findByDateSubmitted();
         if (songs.isEmpty()){
             return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
         }else {
