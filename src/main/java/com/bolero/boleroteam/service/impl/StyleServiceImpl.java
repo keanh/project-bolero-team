@@ -1,6 +1,6 @@
 package com.bolero.boleroteam.service.impl;
 
-import com.bolero.boleroteam.Repository.StyleRepository;
+import com.bolero.boleroteam.repository.StyleRepository;
 import com.bolero.boleroteam.model.Style;
 import com.bolero.boleroteam.service.StyleService;
 import org.springframework.beans.factory.annotation.Autowired;

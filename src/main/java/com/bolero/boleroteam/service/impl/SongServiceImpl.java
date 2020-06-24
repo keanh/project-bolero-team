@@ -1,7 +1,8 @@
 package com.bolero.boleroteam.service.impl;
 
-import com.bolero.boleroteam.Repository.SongRepository;
+import com.bolero.boleroteam.repository.SongRepository;
 import com.bolero.boleroteam.model.Song;
+import com.bolero.boleroteam.repository.SongRepository;
 import com.bolero.boleroteam.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
