@@ -1,17 +1,26 @@
 package com.bolero.boleroteam.model;
 
-import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "roles")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @NaturalId
+    @Column(length = 60)
+    private RoleName name;
+
+    public Role() {}
+
+    public Role(RoleName name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -21,11 +30,12 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
+    public RoleName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(RoleName name) {
         this.name = name;
     }
+
 }

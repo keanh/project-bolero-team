@@ -19,8 +19,8 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "register",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createUser(@RequestBody User user){
+    @PostMapping(value = "user/create",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> createSong(@RequestBody User user){
         userService.save(user);
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
@@ -48,22 +48,20 @@ public class UserRestController {
         }
     }
 
-    @PutMapping("user/info/{id}")
-    public ResponseEntity<User> updateInfoUser(@PathVariable Long id,@RequestBody User user){
-        Optional<User> user1 = userService.findById(id);
-        User user2 = user1.get();
-        if (user2 == null){
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-        }else {
-            user2.setFirstName(user.getFirstName());
-            user2.setLastName(user.getLastName());
-            user2.setBirthday(user.getBirthday());
-            user2.setAddress(user.getAddress());
-            user2.setEmail(user.getEmail());
-            user2.setPhone(user.getPhone());
-            userService.save(user2);
-            return new ResponseEntity<User>(user2,HttpStatus.OK);
-        }
+    @PutMapping("user/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id,@RequestBody User user){
+//        Optional<User> user1 = userService.findById(id);
+//        User user2 = user1.get();
+//        if (user2 == null){
+//            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+//        }else {
+//            user2.setName(user.getName());
+//            user2.setAge(user.getAge());
+//            user2.setEmail(user.getEmail());
+//            user2.setPhone(user.getPhone());
+//            userService.save(user2);
+            return new ResponseEntity<User>(HttpStatus.OK);
+//        }
     }
 
     @DeleteMapping("user/{id}")
