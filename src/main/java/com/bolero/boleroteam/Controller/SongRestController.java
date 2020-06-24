@@ -26,10 +26,6 @@ public class SongRestController {
         songService.save(song);
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-        //        System.out.println("Before Formatting: " + now);
-//        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-//        String formatDateTime = now.format(format);
-//        System.out.println("After Formatting: " + formatDateTime);
     }
 
     @GetMapping(value = "song")
@@ -46,10 +42,13 @@ public class SongRestController {
     @GetMapping(value = "song/{id}")
     public ResponseEntity<Song> findSongById(@PathVariable Long id){
         Optional<Song> song = songService.findById(id);
+        System.out.println("ok");
         Song song1 = song.get();
         if (song1 == null){
             return new ResponseEntity<Song>(HttpStatus.NOT_FOUND);
         }else {
+            song1.increment();
+            songService.save(song1);
             return new ResponseEntity<Song>(song1,HttpStatus.OK);
         }
     }
@@ -104,8 +103,8 @@ public class SongRestController {
         }
     }
 
-    @GetMapping(value = "lastest-song")
-    public ResponseEntity<List<Song>> findLastestSong(){
+    @GetMapping(value = "latest-song")
+    public ResponseEntity<List<Song>> findLatestSong(){
         List<Song> songs = songService.find3LastestSong();
         if (songs.isEmpty()){
             return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);

@@ -1,5 +1,6 @@
 package com.bolero.boleroteam.Controller;
 
+import com.bolero.boleroteam.model.Song;
 import com.bolero.boleroteam.model.User;
 import com.bolero.boleroteam.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "user/create",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "register",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createUser(@RequestBody User user){
         userService.save(user);
         HttpHeaders headers = new HttpHeaders();
@@ -58,7 +59,6 @@ public class UserRestController {
             user2.setLastName(user.getLastName());
             user2.setBirthday(user.getBirthday());
             user2.setAddress(user.getAddress());
-            user2.setAge(user.getAge());
             user2.setEmail(user.getEmail());
             user2.setPhone(user.getPhone());
             userService.save(user2);
