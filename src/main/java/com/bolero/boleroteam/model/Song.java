@@ -2,9 +2,12 @@ package com.bolero.boleroteam.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,7 +39,7 @@ public class Song {
     @NotEmpty
     private String author;
 
-    private Long views;
+    private Long views = 0L;
 
     @ManyToOne
     private Style style;
@@ -46,10 +49,6 @@ public class Song {
 
     @ManyToOne
     private Likes likes;
-
-    @ManyToMany(mappedBy = "songList")
-    @JsonIgnore
-    private List<PlayList> playLists;
 
     public Long getId() {
         return id;
@@ -123,6 +122,10 @@ public class Song {
         this.views = views;
     }
 
+    public Long increment(){
+        return views++;
+    }
+
     public Style getStyle() {
         return style;
     }
@@ -147,11 +150,4 @@ public class Song {
         this.likes = likes;
     }
 
-    public List<PlayList> getPlayLists() {
-        return playLists;
-    }
-
-    public void setPlayLists(List<PlayList> playLists) {
-        this.playLists = playLists;
-    }
 }

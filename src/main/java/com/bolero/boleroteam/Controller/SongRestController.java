@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ public class SongRestController {
     }
 
     @GetMapping(value = "song")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<List<Song>> listSongs(){
         List<Song> songs;
         songs = songService.findAll();
@@ -42,10 +44,13 @@ public class SongRestController {
     @GetMapping(value = "song/{id}")
     public ResponseEntity<Song> findSongById(@PathVariable Long id){
         Optional<Song> song = songService.findById(id);
+        System.out.println("ok");
         Song song1 = song.get();
         if (song1 == null){
             return new ResponseEntity<Song>(HttpStatus.NOT_FOUND);
         }else {
+            song1.increment();
+            songService.save(song1);
             return new ResponseEntity<Song>(song1,HttpStatus.OK);
         }
     }
@@ -102,7 +107,7 @@ public class SongRestController {
 
     @GetMapping(value = "latest-song")
     public ResponseEntity<List<Song>> findLatestSong(){
-        List<Song> songs = songService.findByDateSubmitted();
+        List<Song> songs = songService.find3LastestSong();
         if (songs.isEmpty()){
             return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
         }else {
