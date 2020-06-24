@@ -1,12 +1,15 @@
 package com.bolero.boleroteam.model;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table
@@ -16,6 +19,7 @@ public class Song {
     private Long id;
 
     @NotEmpty
+    @Length(max = 100)
     private String name;
 
     @NotEmpty
@@ -34,13 +38,17 @@ public class Song {
 
     @NotEmpty
     private String author;
-    private Long views;
+
+    private Long views = 0L;
 
     @ManyToOne
     private Style style;
 
     @ManyToOne(targetEntity = User.class)
     private User user;
+
+    @ManyToOne
+    private Likes likes;
 
     public Long getId() {
         return id;
@@ -114,6 +122,10 @@ public class Song {
         this.views = views;
     }
 
+    public Long increment(){
+        return views++;
+    }
+
     public Style getStyle() {
         return style;
     }
@@ -129,4 +141,13 @@ public class Song {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Likes getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Likes likes) {
+        this.likes = likes;
+    }
+
 }

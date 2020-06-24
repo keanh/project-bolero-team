@@ -74,4 +74,17 @@ public class UserRestController {
             return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
         }
     }
+
+    @PutMapping("user/{id}")
+    public ResponseEntity<User> updatePassword(@PathVariable Long id,@RequestBody User user){
+        Optional<User> user1 = userService.findById(id);
+        User user2 = user1.get();
+        if (user2 == null){
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }else {
+            user2.setPassword(user.getPassword());
+            userService.save(user2);
+            return new ResponseEntity<User>(user2,HttpStatus.OK);
+        }
+    }
 }

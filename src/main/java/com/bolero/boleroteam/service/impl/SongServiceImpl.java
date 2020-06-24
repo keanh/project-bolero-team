@@ -43,8 +43,13 @@ public class SongServiceImpl implements SongService {
         return songRepository.findByNameContaining(name);
     }
 
+//    @Override
+//    public List<Song> findByDateSubmitted() {
+//        return songRepository.findByOrderByDateSubmittedDesc();
+//    }
+
     @Override
-    public List<Song> findByDateSummited() {
-        return songRepository.findByOrderByDateSubmittedDesc();
+    public List<Song> find3LastestSong() {
+        return songRepository.findTop3ByOrderByDateSubmittedDesc();
     }
 }
