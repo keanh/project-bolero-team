@@ -20,7 +20,7 @@ public class SongRestController {
     @Autowired
     private SongService songService;
 
-    @PostMapping(value = "song/create",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "api/auth/song/create",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createSong(@RequestBody Song song){
         LocalDateTime now = LocalDateTime.now();
         song.setDateSubmitted(now);
