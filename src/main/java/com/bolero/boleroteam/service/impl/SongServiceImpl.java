@@ -49,7 +49,7 @@ public class SongServiceImpl implements SongService {
 //    }
 
     @Override
-    public List<Song> find3LastestSong() {
+    public List<Song> find3LatestSong() {
         return songRepository.findTop3ByOrderByDateSubmittedDesc();
     }
 }
