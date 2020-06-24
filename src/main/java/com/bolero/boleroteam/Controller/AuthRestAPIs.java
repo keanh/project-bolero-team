@@ -8,7 +8,6 @@ import com.bolero.boleroteam.message.request.SignUpForm;
 import com.bolero.boleroteam.message.response.JwtResponse;
 import com.bolero.boleroteam.model.Role;
 import com.bolero.boleroteam.model.RoleName;
-import com.bolero.boleroteam.model.Song;
 import com.bolero.boleroteam.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,7 +54,6 @@ public class AuthRestAPIs {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         String jwt = jwtProvider.generateJwtToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
@@ -67,36 +65,37 @@ public class AuthRestAPIs {
             return new ResponseEntity<String>("Fail -> Username is already taken!",
                     HttpStatus.BAD_REQUEST);
         }
-
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<String>("Fail -> Email is already in use!",
                     HttpStatus.BAD_REQUEST);
         }
         // Creating user's account
         User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
+                signUpRequest.getEmail(),encoder.encode(signUpRequest.getPassword()), signUpRequest.getFirstName(), signUpRequest.getLastName(),
+                signUpRequest.getPhoneNumber());
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
-
-        strRoles.forEach(role -> {
-            switch(role) {
-                case "admin":
-                    Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(adminRole);
-                    break;
-                case "pm":
-                    Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(pmRole);
-                    break;
-                default:
-                    Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(userRole);
-            }
-        });
-
+//        strRoles.forEach(role -> {
+//            switch(role) {
+//                case "admin":
+//                    Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+//                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+//                    roles.add(adminRole);
+//                    break;
+//                case "pm":
+//                    Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
+//                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+//                    roles.add(pmRole);
+//                    break;
+//                default:
+//                    Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+//                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+//                    roles.add(userRole);
+//            }
+//        });
+        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+        roles.add(userRole);
         user.setRoles(roles);
         userRepository.save(user);
 
