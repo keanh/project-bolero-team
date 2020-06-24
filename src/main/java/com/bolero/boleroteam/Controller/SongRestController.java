@@ -30,7 +30,7 @@ public class SongRestController {
     }
 
     @GetMapping(value = "song")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<List<Song>> listSongs(){
         List<Song> songs;
         songs = songService.findAll();
