@@ -45,7 +45,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public List<Song> findByDateSummited() {
+    public List<Song> findByDateSubmitted() {
         return songRepository.findByOrderByDateSubmittedDesc();
     }
 }
