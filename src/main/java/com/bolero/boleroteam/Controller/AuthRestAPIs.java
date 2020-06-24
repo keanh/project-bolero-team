@@ -1,6 +1,6 @@
 package com.bolero.boleroteam.controller;
 
-import com.bolero.boleroteam.Repository.RoleRepository;
+import com.bolero.boleroteam.repository.RoleRepository;
 import com.bolero.boleroteam.repository.UserRepository;
 import com.bolero.boleroteam.config.jwt.JwtProvider;
 import com.bolero.boleroteam.message.request.LoginForm;
