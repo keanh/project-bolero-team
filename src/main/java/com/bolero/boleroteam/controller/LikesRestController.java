@@ -1,4 +1,4 @@
-package com.bolero.boleroteam.Controller;
+package com.bolero.boleroteam.controller;
 
 import com.bolero.boleroteam.model.Likes;
 import com.bolero.boleroteam.service.LikesService;

@@ -1,4 +1,4 @@
-package com.bolero.boleroteam.Controller;
+package com.bolero.boleroteam.controller;
 
 import com.bolero.boleroteam.model.Song;
 import com.bolero.boleroteam.service.SongService;
@@ -7,7 +7,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -29,7 +28,7 @@ public class SongRestController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "song")
+    @GetMapping(value = "/api/auth/song")
 //    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<List<Song>> listSongs(){
         List<Song> songs;
@@ -41,7 +40,7 @@ public class SongRestController {
         }
     }
 
-    @GetMapping(value = "song/{id}")
+    @GetMapping(value = "/api/auth/song/{id}")
     public ResponseEntity<Song> findSongById(@PathVariable Long id){
         Optional<Song> song = songService.findById(id);
         System.out.println("ok");
@@ -55,7 +54,7 @@ public class SongRestController {
         }
     }
 
-    @PutMapping("song/{id}")
+    @PutMapping("/api/auth/song/{id}")
     public ResponseEntity<Song> updateSong(@PathVariable Long id,@RequestBody Song song){
         Optional<Song> song1 = songService.findById(id);
         Song song2 = song1.get();
@@ -75,7 +74,7 @@ public class SongRestController {
         }
     }
 
-    @DeleteMapping("song/{id}")
+    @DeleteMapping("/api/auth/song/{id}")
     public ResponseEntity<Song> deleteSong(@PathVariable Long id){
         Optional<Song> song = songService.findById(id);
         if (song == null){
@@ -86,7 +85,7 @@ public class SongRestController {
         }
     }
 
-    @GetMapping("findByLyrics/{lyric}")
+    @GetMapping("/api/auth/findByLyrics/{lyric}")
     public ResponseEntity<List<Song>> findByLyrics(@PathVariable("lyric") String lyrics){
         List<Song> songs = songService.findByLyrics(lyrics);
         if (songs.isEmpty()){
@@ -95,7 +94,7 @@ public class SongRestController {
             return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
         }
     }
-    @GetMapping("findByName/{name}")
+    @GetMapping("/api/auth/findByName/{name}")
     public ResponseEntity<List<Song>> findByName(@PathVariable("name") String name){
         List<Song> songs = songService.findByName(name);
         if (songs.isEmpty()){
@@ -105,9 +104,18 @@ public class SongRestController {
         }
     }
 
-    @GetMapping(value = "latest-song")
+    @GetMapping(value ="/api/auth/latest-song")
     public ResponseEntity<List<Song>> findLatestSong(){
         List<Song> songs = songService.find3LatestSong();
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
+    @GetMapping(value = "/api/auth/most-views-song") // API lấy danh sách bài hát nhiều lượt nghe nhất
+    public ResponseEntity<List<Song>> findMostViewSong(){
+        List<Song> songs = songService.findAllByOrderByViewsDesc();
         if (songs.isEmpty()){
             return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
         }else {

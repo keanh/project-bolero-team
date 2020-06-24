@@ -1,4 +1,4 @@
-package com.bolero.boleroteam.Controller;
+package com.bolero.boleroteam.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
