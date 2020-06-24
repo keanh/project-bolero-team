@@ -8,7 +8,6 @@ import com.bolero.boleroteam.message.request.SignUpForm;
 import com.bolero.boleroteam.message.response.JwtResponse;
 import com.bolero.boleroteam.model.Role;
 import com.bolero.boleroteam.model.RoleName;
-import com.bolero.boleroteam.model.Song;
 import com.bolero.boleroteam.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
