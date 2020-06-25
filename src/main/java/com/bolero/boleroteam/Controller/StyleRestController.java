@@ -1,4 +1,4 @@
-package com.bolero.boleroteam.controller;
+package com.bolero.boleroteam.Controller;
 
 import com.bolero.boleroteam.model.Song;
 import com.bolero.boleroteam.model.Style;
