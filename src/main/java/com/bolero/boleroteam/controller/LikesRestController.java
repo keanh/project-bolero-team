@@ -1,4 +1,4 @@
-package com.bolero.boleroteam.Controller;
+package com.bolero.boleroteam.controller;
 
 import com.bolero.boleroteam.model.Likes;
 import com.bolero.boleroteam.service.LikesService;
@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @CrossOrigin("*")
 public class LikesRestController {
+
     @Autowired
     private LikesService likesService;
 
@@ -28,4 +29,5 @@ public class LikesRestController {
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
+
 }

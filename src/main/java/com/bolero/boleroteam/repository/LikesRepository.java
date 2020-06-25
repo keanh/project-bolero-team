@@ -1,4 +1,4 @@
-package com.bolero.boleroteam.Repository;
+package com.bolero.boleroteam.repository;
 
 import com.bolero.boleroteam.model.Likes;
 import org.springframework.data.repository.CrudRepository;

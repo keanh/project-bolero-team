@@ -1,6 +1,6 @@
 package com.bolero.boleroteam.service.impl;
 
-import com.bolero.boleroteam.Repository.UserRepository;
+import com.bolero.boleroteam.repository.UserRepository;
 import com.bolero.boleroteam.model.User;
 import com.bolero.boleroteam.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
+    }
+
+    @Override
+    public Optional<User> findByName(String name) {
+        return userRepository.findByUsername(name);
     }
 
     @Override
