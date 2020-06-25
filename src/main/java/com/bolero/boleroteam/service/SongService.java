@@ -13,6 +13,8 @@ public interface SongService {
     List<Song> findByLyrics(String lyrics);
     List<Song> findByName(String name);
 //    List<Song> findByDateSubmitted();
+    List<Song> find3LatestSong();
+    List<Song> findAllByOrderByViewsDesc();
     List<Song> find3LastestSong();
-    List<Likes> findAllListLikeByUserId(Long id);
+//    List<Likes> findAllListLikeByUserId(Long id);
 }

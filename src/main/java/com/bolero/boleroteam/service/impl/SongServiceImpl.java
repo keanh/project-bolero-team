@@ -2,7 +2,10 @@ package com.bolero.boleroteam.service.impl;
 
 import com.bolero.boleroteam.repository.SongRepository;
 import com.bolero.boleroteam.model.Likes;
+import com.bolero.boleroteam.repository.SongRepository;
+
 import com.bolero.boleroteam.model.Song;
+
 import com.bolero.boleroteam.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,12 +53,22 @@ public class SongServiceImpl implements SongService {
 //    }
 
     @Override
-    public List<Song> find3LastestSong() {
+    public List<Song> find3LatestSong() {
         return songRepository.findTop3ByOrderByDateSubmittedDesc();
     }
 
     @Override
-    public List<Likes> findAllListLikeByUserId(Long id) {
-        return songRepository.findAllByUserId(id);
+    public List<Song> findAllByOrderByViewsDesc() {
+        return songRepository.findAllByOrderByViewsDesc();
+    }
+
+//    @Override
+//    public List<Likes> findAllListLikeByUserId(Long id) {
+//        return songRepository.findAllByUserId(id);
+//    }
+
+    @Override
+    public List<Song> find3LastestSong() {
+        return null;
     }
 }

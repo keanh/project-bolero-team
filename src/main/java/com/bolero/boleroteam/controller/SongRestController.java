@@ -1,4 +1,4 @@
-package com.bolero.boleroteam.Controller;
+package com.bolero.boleroteam.controller;
 
 import com.bolero.boleroteam.model.Likes;
 import com.bolero.boleroteam.model.Song;
@@ -9,7 +9,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -110,9 +109,18 @@ public class SongRestController {
         }
     }
 
-    @GetMapping(value = "latest-song")
+    @GetMapping(value ="latest-song")
     public ResponseEntity<List<Song>> findLatestSong(){
-        List<Song> songs = songService.find3LastestSong();
+        List<Song> songs = songService.find3LatestSong();
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
+    @GetMapping(value = "most-views-song") // API lấy danh sách bài hát nhiều lượt nghe nhất
+    public ResponseEntity<List<Song>> findMostViewSong(){
+        List<Song> songs = songService.findAllByOrderByViewsDesc();
         if (songs.isEmpty()){
             return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
         }else {

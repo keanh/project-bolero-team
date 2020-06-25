@@ -1,6 +1,5 @@
-package com.bolero.boleroteam.Controller;
+package com.bolero.boleroteam.controller;
 
-import com.bolero.boleroteam.model.Song;
 import com.bolero.boleroteam.model.Style;
 import com.bolero.boleroteam.service.StyleService;
 import com.bolero.boleroteam.service.impl.FirebaseServiceImpl;
@@ -11,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
