@@ -1,8 +1,6 @@
-package com.bolero.boleroteam.Repository;
+package com.bolero.boleroteam.repository;
 
 import com.bolero.boleroteam.model.Likes;
-import com.bolero.boleroteam.model.Song;
-import org.springframework.data.relational.core.sql.Like;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

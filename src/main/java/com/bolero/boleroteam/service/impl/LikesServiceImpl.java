@@ -1,6 +1,6 @@
 package com.bolero.boleroteam.service.impl;
 
-import com.bolero.boleroteam.Repository.LikesRepository;
+import com.bolero.boleroteam.repository.LikesRepository;
 import com.bolero.boleroteam.model.Likes;
 import com.bolero.boleroteam.service.LikesService;
 import org.springframework.beans.factory.annotation.Autowired;

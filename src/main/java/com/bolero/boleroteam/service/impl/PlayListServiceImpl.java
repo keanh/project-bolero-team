@@ -1,6 +1,6 @@
 package com.bolero.boleroteam.service.impl;
 
-import com.bolero.boleroteam.Repository.PlayListRepository;
+import com.bolero.boleroteam.repository.PlayListRepository;
 import com.bolero.boleroteam.model.PlayList;
 import com.bolero.boleroteam.service.PlayListService;
 import org.springframework.beans.factory.annotation.Autowired;

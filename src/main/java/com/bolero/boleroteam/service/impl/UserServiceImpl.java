@@ -1,6 +1,6 @@
 package com.bolero.boleroteam.service.impl;
 
-import com.bolero.boleroteam.Repository.UserRepository;
+import com.bolero.boleroteam.repository.UserRepository;
 import com.bolero.boleroteam.model.User;
 import com.bolero.boleroteam.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
