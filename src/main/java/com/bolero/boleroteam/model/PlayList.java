@@ -3,6 +3,7 @@ package com.bolero.boleroteam.model;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class PlayList {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id ;
 
+    @NotEmpty
     private String name;
 
     @ManyToOne

@@ -11,4 +11,5 @@ public interface LikesService {
     Optional<Likes> findById(Long id);
     void save(Likes likes);
     void remove(Long id);
+    List<Likes> findAllLikesById(Long id);
 }

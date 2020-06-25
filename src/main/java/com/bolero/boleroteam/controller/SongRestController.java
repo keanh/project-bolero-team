@@ -1,6 +1,8 @@
 package com.bolero.boleroteam.controller;
 
+import com.bolero.boleroteam.model.Likes;
 import com.bolero.boleroteam.model.Song;
+import com.bolero.boleroteam.service.LikesService;
 import com.bolero.boleroteam.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +20,9 @@ import java.util.Optional;
 public class SongRestController {
     @Autowired
     private SongService songService;
+
+    @Autowired
+    private LikesService likesService;
 
     @PostMapping(value = "song/create",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createSong(@RequestBody Song song){
@@ -104,13 +109,51 @@ public class SongRestController {
         }
     }
 
-    @GetMapping(value = "latest-song")
+    @GetMapping(value ="latest-song")
     public ResponseEntity<List<Song>> findLatestSong(){
-        List<Song> songs = songService.find3LastestSong();
+        List<Song> songs = songService.find3LatestSong();
         if (songs.isEmpty()){
             return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
         }else {
             return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
         }
+    }
+    @GetMapping(value = "most-views-song") // API lấy danh sách bài hát nhiều lượt nghe nhất
+    public ResponseEntity<List<Song>> findMostViewSong(){
+        List<Song> songs = songService.findAllByOrderByViewsDesc();
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
+
+    @PutMapping(value = "like/{songId}")
+    public ResponseEntity<Song> incrementLike(@RequestBody Likes likes,@PathVariable Long songId){
+        Optional<Song> songOptional = songService.findById(songId);
+        if(!songOptional.isPresent()){
+            return new ResponseEntity<Song>(HttpStatus.NOT_FOUND);
+        }
+        Song song = songOptional.get();
+        Long currentLikeId = -1L;
+        int lastIndex = -1;
+        List<Likes> likesList = song.getLikes();
+        for(int i = 0; i < likesList.size(); i++) {
+            if (likesList.get(i).getUser().getId().equals(likes.getUser().getId())){
+                currentLikeId = likesList.get(i).getId();
+                lastIndex = i;
+                break;
+            }
+        }
+        if(currentLikeId > 0) {
+            likesService.remove(currentLikeId);
+            likesList.remove(lastIndex);
+            songService.save(song);
+            return new ResponseEntity<Song>(song,HttpStatus.NO_CONTENT);
+        }
+        likesService.save(likes);
+        likesList.add(likes);
+        songService.save(song);
+        return new ResponseEntity<Song>(song,HttpStatus.OK);
     }
 }
