@@ -47,8 +47,8 @@ public class Song {
     @ManyToOne(targetEntity = User.class)
     private User user;
 
-    @ManyToOne
-    private Likes likes;
+    @OneToMany
+    private List<Likes> likes;
 
     public Long getId() {
         return id;
@@ -142,12 +142,11 @@ public class Song {
         this.user = user;
     }
 
-    public Likes getLikes() {
+    public List<Likes> getLikes() {
         return likes;
     }
 
-    public void setLikes(Likes likes) {
+    public void setLikes(List<Likes> likes) {
         this.likes = likes;
     }
-
 }

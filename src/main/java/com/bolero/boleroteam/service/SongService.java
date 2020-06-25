@@ -1,5 +1,6 @@
 package com.bolero.boleroteam.service;
 
+import com.bolero.boleroteam.model.Likes;
 import com.bolero.boleroteam.model.Song;
 import java.util.List;
 import java.util.Optional;
@@ -13,4 +14,5 @@ public interface SongService {
     List<Song> findByName(String name);
 //    List<Song> findByDateSubmitted();
     List<Song> find3LastestSong();
+    List<Likes> findAllListLikeByUserId(Long id);
 }
