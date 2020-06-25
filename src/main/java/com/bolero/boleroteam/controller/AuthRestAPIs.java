@@ -115,6 +115,5 @@ public class AuthRestAPIs {
 //                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //            }
 //        }
-//
 //    }
 }

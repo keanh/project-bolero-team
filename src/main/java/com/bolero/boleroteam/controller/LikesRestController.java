@@ -14,6 +14,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin("*")
 public class LikesRestController {
+
     @Autowired
     private LikesService likesService;
 
@@ -40,4 +41,5 @@ public class LikesRestController {
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
+
 }

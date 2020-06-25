@@ -69,6 +69,6 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public List<Song> find3LastestSong() {
-        return null;
+        return songRepository.findTop3ByOrderByDateSubmittedDesc();
     }
 }
