@@ -19,7 +19,7 @@ public class SongRestController {
     @Autowired
     private SongService songService;
 
-    @PostMapping(value = "api/auth/song/create",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/song/create",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createSong(@RequestBody Song song){
         LocalDateTime now = LocalDateTime.now();
         song.setDateSubmitted(now);
@@ -28,7 +28,7 @@ public class SongRestController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/api/auth/song")
+    @GetMapping(value = "/song")
 //    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<List<Song>> listSongs(){
         List<Song> songs;
@@ -40,7 +40,7 @@ public class SongRestController {
         }
     }
 
-    @GetMapping(value = "/api/auth/song/{id}")
+    @GetMapping(value = "/song/{id}")
     public ResponseEntity<Song> findSongById(@PathVariable Long id){
         Optional<Song> song = songService.findById(id);
         System.out.println("ok");
@@ -54,7 +54,7 @@ public class SongRestController {
         }
     }
 
-    @PutMapping("/api/auth/song/{id}")
+    @PutMapping("/song/{id}")
     public ResponseEntity<Song> updateSong(@PathVariable Long id,@RequestBody Song song){
         Optional<Song> song1 = songService.findById(id);
         Song song2 = song1.get();
@@ -74,7 +74,7 @@ public class SongRestController {
         }
     }
 
-    @DeleteMapping("/api/auth/song/{id}")
+    @DeleteMapping("/song/{id}")
     public ResponseEntity<Song> deleteSong(@PathVariable Long id){
         Optional<Song> song = songService.findById(id);
         if (song == null){
@@ -85,7 +85,7 @@ public class SongRestController {
         }
     }
 
-    @GetMapping("/api/auth/findByLyrics/{lyric}")
+    @GetMapping("/findByLyrics/{lyric}")
     public ResponseEntity<List<Song>> findByLyrics(@PathVariable("lyric") String lyrics){
         List<Song> songs = songService.findByLyrics(lyrics);
         if (songs.isEmpty()){
@@ -94,7 +94,7 @@ public class SongRestController {
             return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
         }
     }
-    @GetMapping("/api/auth/findByName/{name}")
+    @GetMapping("/findByName/{name}")
     public ResponseEntity<List<Song>> findByName(@PathVariable("name") String name){
         List<Song> songs = songService.findByName(name);
         if (songs.isEmpty()){
