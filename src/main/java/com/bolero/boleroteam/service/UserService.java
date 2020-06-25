@@ -11,4 +11,5 @@ public interface UserService {
     Optional<User> findByName(String name);
     void save(User user);
     void remove(Long id);
+    void changePassword(User user, String oldPassword, String newPassword);
 }
