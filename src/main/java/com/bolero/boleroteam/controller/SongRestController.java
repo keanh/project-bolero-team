@@ -109,6 +109,16 @@ public class SongRestController {
         }
     }
 
+    @GetMapping(value ="song/mylist/{id}")
+    public ResponseEntity<List<Song>> findAllSongById(@PathVariable Long id){
+        List<Song> songs = songService.findAllSongByUserId(id);
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
+
     @GetMapping(value ="latest-song")
     public ResponseEntity<List<Song>> findLatestSong(){
         List<Song> songs = songService.find3LatestSong();
