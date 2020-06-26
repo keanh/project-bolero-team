@@ -9,6 +9,7 @@ import com.bolero.boleroteam.message.response.JwtResponse;
 import com.bolero.boleroteam.model.Role;
 import com.bolero.boleroteam.model.RoleName;
 import com.bolero.boleroteam.model.User;
+import com.bolero.boleroteam.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -34,6 +37,9 @@ public class AuthRestAPIs {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    private UserServiceImpl userService;
 
     @Autowired
     PasswordEncoder encoder;
@@ -101,7 +107,6 @@ public class AuthRestAPIs {
 
         return ResponseEntity.ok().body("User registered successfully!");
     }
-
 //    @PostMapping("/password")
 //    ResponseEntity<String> pssss(@RequestParam("checkPassword") String checkPassword, @RequestParam("newPassword") String newPassword, Long idUser){
 //
@@ -116,4 +121,14 @@ public class AuthRestAPIs {
 //            }
 //        }
 //    }
+    @PutMapping("/updateUser")
+    public ResponseEntity<Void> updateUser(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, Principal principal){
+        Optional<User> user = userRepository.findByUsername(principal.getName());
+        if (!user.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        User user1 = user.get();
+        userService.changePassword(user1, oldPassword, newPassword);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
