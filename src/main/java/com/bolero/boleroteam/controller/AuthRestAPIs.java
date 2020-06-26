@@ -76,8 +76,9 @@ public class AuthRestAPIs {
                     HttpStatus.BAD_REQUEST);
         }
         // Creating user's account
-        User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(),encoder.encode(signUpRequest.getPassword()), signUpRequest.getFirstName(), signUpRequest.getLastName(),
+        signUpRequest.getName();
+        User user = new User(signUpRequest.getUsername(),
+                signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()), signUpRequest.getFirstName(), signUpRequest.getLastName(),
                 signUpRequest.getPhoneNumber());
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

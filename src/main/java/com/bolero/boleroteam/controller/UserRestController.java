@@ -5,10 +5,7 @@ import com.bolero.boleroteam.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -58,21 +55,21 @@ public class UserRestController {
 //        }
 //    }
 //
-//    @PutMapping("user/{id}")
-//    public ResponseEntity<User> updateUser(@PathVariable Long id,@RequestBody User user){
-////        Optional<User> user1 = userService.findById(id);
-////        User user2 = user1.get();
-////        if (user2 == null){
-////            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-////        }else {
-////            user2.setName(user.getName());
-////            user2.setAge(user.getAge());
-////            user2.setEmail(user.getEmail());
-////            user2.setPhone(user.getPhone());
-////            userService.save(user2);
-//            return new ResponseEntity<User>(HttpStatus.OK);
-////        }
-//    }
+    @PutMapping("user/{name}")
+    public ResponseEntity<User> updateUser(@PathVariable("name") String username, @RequestBody User user){
+        Optional<User> user1 = userService.findByName(username);
+        User user2 = user1.get();
+        if (user2 == null){
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }else {
+            user2.setFirstName(user.getFirstName());
+            user2.setLastName(user.getLastName());
+            user2.setEmail(user.getEmail());
+            user2.setPhoneNumber(user.getPhoneNumber());
+            userService.save(user2);
+            return new ResponseEntity<User>(HttpStatus.OK);
+        }
+    }
 //
 //    @DeleteMapping("user/{id}")
 //    public ResponseEntity<User> deleteUser(@PathVariable Long id){
