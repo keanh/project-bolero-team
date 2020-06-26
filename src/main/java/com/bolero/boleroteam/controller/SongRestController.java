@@ -166,4 +166,14 @@ public class SongRestController {
         songService.save(song);
         return new ResponseEntity<Song>(song,HttpStatus.OK);
     }
+
+    @GetMapping(value = "most-like-song")
+    public ResponseEntity<List<Song>> get6SongHaveMostLike(){
+        List<Song> songs = songService.findAllSongByLikes();
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
 }

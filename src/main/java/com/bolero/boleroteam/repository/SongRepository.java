@@ -11,5 +11,5 @@ public interface SongRepository extends CrudRepository<Song, Long> {
     List<Song> findTop6ByOrderByDateSubmittedDesc();
     List<Song> findAllByOrderByViewsDesc();
     List<Song> findAllByUserId(Long id);
-//    List<Likes> findAllByUserId(Long id);
+    List<Song> findTop1ByOrderByLikesDesc();
 }
