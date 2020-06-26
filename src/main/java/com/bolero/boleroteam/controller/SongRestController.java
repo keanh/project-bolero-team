@@ -156,4 +156,13 @@ public class SongRestController {
         songService.save(song);
         return new ResponseEntity<Song>(song,HttpStatus.OK);
     }
+    @GetMapping(value = "favorite-song")
+    public ResponseEntity<List<Song>> findFavoriteSong(){
+        List<Song> songs = songService.findAllByOrderByLikesDesc();
+        if (songs.isEmpty()){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
+        }
+    }
 }

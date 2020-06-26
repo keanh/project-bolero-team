@@ -32,4 +32,5 @@ public class PlayListServiceImpl implements PlayListService {
     public void remove(Long id) {
         playListRepository.deleteById(id);
     }
+
 }

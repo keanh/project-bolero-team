@@ -62,13 +62,10 @@ public class SongServiceImpl implements SongService {
         return songRepository.findAllByOrderByViewsDesc();
     }
 
-//    @Override
-//    public List<Likes> findAllListLikeByUserId(Long id) {
-//        return songRepository.findAllByUserId(id);
-//    }
-
     @Override
-    public List<Song> find3LastestSong() {
-        return songRepository.findTop3ByOrderByDateSubmittedDesc();
+    public List<Song> findAllByOrderByLikesDesc() {
+        return songRepository.findAllByOrderByLikesDesc();
     }
+
+
 }
