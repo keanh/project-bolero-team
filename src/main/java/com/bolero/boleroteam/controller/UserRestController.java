@@ -1,13 +1,33 @@
 package com.bolero.boleroteam.controller;
 
+import com.bolero.boleroteam.model.User;
+import com.bolero.boleroteam.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
 public class UserRestController {
-    //    @Autowired
-//    private UserService userService;
+    @Autowired
+    private UserService userService;
+
+    @GetMapping(value = "user/{name}")
+    public ResponseEntity<User> findUserByName(@PathVariable String name){
+        Optional<User> user = userService.findByName(name);
+        User user1 = user.get();
+        if (user1 == null){
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<User>(user1,HttpStatus.OK);
+        }
+    }
 //
 //    @PostMapping(value = "user/create",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<Void> createSong(@RequestBody User user){
